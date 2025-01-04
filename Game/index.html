@@ -4,20 +4,33 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="./style.css">
         <script src="script.js" defer></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400..900&family=Playwrite+IE+Guides&family=Sixtyfour&display=swap" rel="stylesheet">
     </head>
     <body class="body">
-        <div class="content">
-            <div class="score">
-                <div>Human Score: <span class="human_score">0</span></div>
-                <div>Computer Score: <span class="computer_score">0</span></div>
+        <div class="container">
+            <div class="wrapper">
+                <div class="title">Rock, Paper, Scissors</div>
+                <div class="score">
+                    <div class="human">Human Score</div>
+                    <div class="score-nbrs">0 - 0</div>
+                    <div class="computer">Computer Score</div>
+                </div>
+                <div class="buttons">
+                    <button type="button">
+                        <img src="../imgs/scissors.png" alt="scissors" class="scissors">
+                    </button>
+                    <button type="button">
+                        <img src="../imgs/paper.png" alt="paper" class="paper">
+                    </button>
+                    <button type="button">
+                        <img src="../imgs/rock.png" alt="rock" class="rock">
+                    </button>
+                </div>
             </div>
-            <div class="buttons">
-                <button type="button" class="rock">Rock</button>
-                <button type="button" class="paper">Paper</button>
-                <button type="button" class="scissors">Scissors</button>
-            </div>
-            <div class="result"></div>
         </div>
     </body>
 </html>

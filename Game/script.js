@@ -1,3 +1,10 @@
+// still left: 
+    // images should move when cursor on them
+    // when the page goes to the second one, the title at the center will grow little by little during that hiding duration
+
+// create node for result
+
+
 let humanScore = 0;
 let computerScore = 0;
 
