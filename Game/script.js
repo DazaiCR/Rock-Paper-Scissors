@@ -1,38 +1,52 @@
-// still left: 
-    // images should move when cursor on them
-    // when the page goes to the second one, the title at the center will grow little by little during that hiding duration
-
-// create node for result
-
-
 let humanScore = 0;
 let computerScore = 0;
+let result;
+let retry = document.createElement("button");
+let cancel = document.createElement("button");
 
 body = document.querySelector(".body");
-content = document.querySelector(".content");
-
-result = document.querySelector(".result");
+container = document.querySelector(".container");
 
 // scores
-score = document.querySelector(".score");
-doc_human_score = document.querySelector(".human_score");
-doc_computer_score = document.querySelector(".computer_score");
-
-
+score = document.querySelector(".score-nbrs");
 
 function displayWinner() {
-    content.remove();
-    const div = document.createElement("div");
-    body.appendChild(div);
-    if(humanScore === computerScore){
-        div.textContent = "Oups! It's a draw.";
-    }
-    else if(humanScore > computerScore){
-        div.textContent = "Yeey! You win.";
+    const message = document.createElement("div");
+    if(humanScore > computerScore){
+        message.textContent = "Yeey! You win!";
     }
     else{
-        div.textContent = "Oups! You lose!";
+        message.textContent = "Oups! You lose!";
     }
+    showFinalPage(message);
+}
+
+function showFinalPage(message) {
+    container.remove();
+    const final_result_container = document.createElement("div");
+    final_result_container.classList.add("final-container");
+    body.appendChild(final_result_container);
+
+    // adding a wrapper
+    const final_wrapper = document.createElement("div");
+    final_wrapper.classList.add("final-result-wrapper");
+    final_result_container.appendChild(final_wrapper);
+
+    // adding final result message
+    message.classList.add("final-message");
+    final_wrapper.appendChild(message);
+
+    // adding reload & cancel options
+    const buttons = document.createElement("div");
+    buttons.classList.add("buttons");
+    final_wrapper.appendChild(buttons);
+
+    retry.textContent = "Retry";
+    cancel.textContent = "Cancel";
+    retry.classList.add("retry-cancel");
+    cancel.classList.add("retry-cancel");
+    buttons.appendChild(retry);
+    buttons.appendChild(cancel);
 }
 
 function getComputerChoice() {
@@ -49,20 +63,36 @@ const outcomes = {
 };
 
 function playRound(humanChoice, computerChoice) {
-
+    result = document.createElement("div");
     if (humanChoice === computerChoice) {
         result.textContent = "It's a draw!";
     } 
     else if (outcomes[humanChoice][computerChoice] === "win") {
-        result.textContent = `You win! ${humanChoice} beats ${computerChoice}.`;
+        result.textContent = `You win! ${humanChoice} beats ${computerChoice}!`;
         humanScore++;
-        doc_human_score.textContent = humanScore;
     } 
     else {
-        result.textContent = `You lose! ${computerChoice} beats ${humanChoice}.`;
+        result.textContent = `You lose! ${computerChoice} beats ${humanChoice}!`;
         computerScore++;
-        doc_computer_score.textContent = computerScore;
     }
+    score.textContent = `${humanScore} - ${computerScore}`;
+}
+
+function showResult() {
+    container.classList.add("hidden");
+    
+    result_container = document.createElement("div");
+    result_container.classList.add("result-container");
+    body.appendChild(result_container);
+    
+    // add the result message
+    result_container.appendChild(result);
+    result.classList.add("result");
+
+    setTimeout(() => {
+        result_container.remove();
+        container.classList.remove("hidden");
+    }, 2000);
 }
 
 // add event listeners to buttons
@@ -71,9 +101,18 @@ buttons = document.querySelectorAll("button");
 buttons.forEach(button => {
     button.addEventListener("click", (event) => {
         playRound(event.target.className, getComputerChoice());
+        showResult();
 
         if(computerScore === 5 || humanScore === 5){
             displayWinner();
         }
     });
+});
+
+retry.addEventListener("click", () => {
+    location.reload();
+});
+
+cancel.addEventListener("click", () => {
+    window.close();
 });
