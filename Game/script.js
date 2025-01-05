@@ -114,5 +114,5 @@ retry.addEventListener("click", () => {
 });
 
 cancel.addEventListener("click", () => {
-    window.close();
+    window.location.href = "about:blank";
 });
